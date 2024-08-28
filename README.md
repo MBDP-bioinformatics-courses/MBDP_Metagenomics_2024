@@ -62,6 +62,6 @@ By completing this course, you will:
 
 ## Organizers and teachers
 
-:woman_technologist: Henni Hultman,  Natural Resources Institute Finland (LUKE)  
+:woman_technologist: Jenni Hultman,  Natural Resources Institute Finland (LUKE)  
 :man_technologist: Antti Karkman, University of Helsinki  
 :man_technologist: Freed Ahmad, University of Helsinki  
