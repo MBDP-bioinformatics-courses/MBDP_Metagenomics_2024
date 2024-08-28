@@ -4,7 +4,7 @@
 
 | Time | Description | Link |
 | --- | --- | -- |
-| 10-10.30 | __All:__ Introduction and course practicals | [Slides](../lectures/01_introduction.pdf) |
+| 10-10.30 | __Everyone:__ Introductions and course practicals | [Slides](../lectures/01_introduction.pdf) |
 | 10.30-11 | __Antti Karkman:__ Introduction to metagenomics | [Slides](../lectures/01_introduction.pdf) |
 | 11.00-11.30 | __Tommi Vatanen:__ Background on course data | [Slides](../lectures/01_introduction.pdf) |
 | 11.30-12.30 | __Hands-on:__ Setup and Data retrieval | [Instructions](README.md#setup) |
