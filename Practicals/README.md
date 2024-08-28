@@ -241,7 +241,7 @@ When all the metaphlan jobs are finished, we can go on with the data analysis of
 But before we can read the data into R, we need to combine the individual metaphlan outputs and extract the species level annotations from there.  
 
 ```bash
-module load metaphlan/4.0.6
+module load metaphlan/4.1.1
 merge_metaphlan_tables.py 05_TAXONOMY/SRR*.txt > 05_TAXONOMY/metaphlan.txt
 awk '$1 ~ "clade_name" || $1 ~ "s__" {print $0}' 05_TAXONOMY/metaphlan.txt |grep -v "t__" > 05_TAXONOMY/metaphlan_species.txt
 ```
@@ -305,7 +305,7 @@ The first task is to create the contigs database from our assembled contigs. To 
 During the contigs database creation, anvi'o does gene calling with prodigal, calculates the tetranucleotide frequencies for each contigs and splits longer contigs into ~20 000 nt chunks called splits.  
 
 ```bash
-module load anvio/7.1
+module load anvio/8
 anvi-script-reformat-fasta 02_ASSEMBLY/contigs.fasta --min-len 2500 -o 03_ANVIO/contigs2500.fasta
 anvi-gen-contigs-database -f 03_ANVIO/contigs2500.fasta -T 6 -o 03_ANVIO/CONTIGS.db
 ```
@@ -336,7 +336,7 @@ Copy the `metaphlan.sh` script to a new file called `mapping.sh` in the same `sr
 * Change the name of the job and the names of the log files
 * Change the time to 1 hour
 * Change the memory to 12G
-* Instead of metaphlan, load `anvio/7.1` module
+* Instead of metaphlan, load `anvio/8` module
 
 **Do not run** the following, but these are the mapping and profiling commands that you need to change in the file:  
 
@@ -428,6 +428,8 @@ sinteractive -A project_2001499 -t 00:30:00
 ```
 
 ```bash
+module load anvio/8
+
 anvi-rename-bins \
     -c 03_ANVIO/CONTIGS.db \
     -p 04_MAPPING/MERGED/PROFILE.db \
@@ -457,7 +459,6 @@ exit
 Now each bin that had completeness and redundancy (according to anvi'o) over 70 % and under 10 %, respectively, will have "MAG" in its name. For example `DF16_MAG_00001`. So we can only pick those for further analyses. We will make a folder with softlinks to all of our MAGs and then analyze only these with CheckM2 and GTDB-Tk.  
 
 ```bash
-mkdir 06_GENOMES
 cd 06_GENOMES
 ln -s ../03_ANVIO/SUMMARY_MAGs/bin_by_bin/*MAG*/*MAG*-contigs.fa ./
 cd ..
@@ -485,9 +486,9 @@ You can use the spades script as a template.
 ### MAG QC with CheckM2
 
 ```bash
-export CHECKM2DB="/scratch/project_2001499/DB/CheckM2/CheckM2_database/uniref100.KO.1.dmnd"
+#export CHECKM2DB="/scratch/project_2001499/DB/CheckM2/CheckM2_database/uniref100.KO.1.dmnd"
 
-/projappl/project_2001499/tax_tools/bin/checkm2 predict \
+/projappl/project_2001499/MAG_tools/bin/checkm2 predict \
     --input 06_GENOMES \
     --output-directory 06_GENOMES/checkm2 \
     --extension fa \
@@ -498,9 +499,9 @@ export CHECKM2DB="/scratch/project_2001499/DB/CheckM2/CheckM2_database/uniref100
 ### MAG taxonomy with GTDB-Tk
 
 ```bash
-export GTDBTK_DATA_PATH="/scratch/project_2001499/DB/release214/"
+#export GTDBTK_DATA_PATH="/scratch/project_2001499/DB/release214/"
 
-/projappl/project_2001499/tax_tools/bin/gtdbtk classify_wf \
+/projappl/project_2001499/MAG_tools/bin/gtdbtk classify_wf \
     --genome_dir 06_GENOMES \
     --out_dir 06_GENOMES/gtdbtk \
     --extension fa \
@@ -523,15 +524,14 @@ sinteractive -A project_2001499 ...
 ```
 
 ```bash
-/projappl/project_2001499/bakta/bin/bakta \
-    06_GENOMES/GENOME_BIN.fa  \
-    --db /scratch/project_2001499/DB/bakta/ \
-    --skip-pseudo \
-    --skip-sorf \
+module load prokka/1.14.6
+
+prokka \
     --prefix GENOME_NAME \
     --locus GENOME_NAME \
-    --threads $SLURM_CPUS_PER_TASK \
-    --output 06_GENOMES/GENOME_NAME 
+    --cpus $SLURM_CPUS_PER_TASK \
+    --outdir 06_GENOMES
+	06_GENOMES/GENOME_BIN.fa
 ```
 
 ## Strain engraftment
@@ -544,7 +544,6 @@ Before we can run the workflow, we need to fetch the recipient data, pre-process
 First make a whole new folder for all this. And put all output files and files we make in this folder.
 
 ```bash
-mkdir 07_RECIPIENTS
 cd 07_RECIPIENTS
 ```
 
@@ -559,30 +558,30 @@ TF29
 TF45
 ```
 
-You should have 12 read accessions to download.  
+You should have 12 read accessions to download. Using the accessions, download the right read files (both R1 and R2) from the folder `/scratch/project_2001499/Data/Recipients`.  
 
-Put the recipient data inside a `Data` folder in the `07_RECIPINTS` folder. Make sure you download them as compressed files (`.gz`). And it might be a good idea to make an array batch job for this task.  
+Put the recipient data inside a `Data` folder in the `07_RECIPINTS` folder. 
 
 ```bash
 mkdir Data
-wget/Kingfisher/... 
+cp ...
 ```
 
 ### Process Genbank files
 
-Process both selected MAGs. The input is the genbank file (`.gbff`) in the bakta output folder.  
+Process both selected MAGs. The input is the genbank file (`.gbXX`) in the prokka output folder.  
 Write the output files to a new folder called `Genomes` in our `07_RECIPIENTS` folder. Add the genome name as the prefix (option `-O`).  
 
 ```bash
 mkdir Genomes
 
-module load anvio/7.1
+module load anvio/8
 
 anvi-script-process-genbank \
     -i PATH/TO/GENOME_NAME.gbff \
     -O PATH/TO/GENOME_NAME \
-    --annotation-source bakta \
-    --annotation-version 1.5.1
+    --annotation-source prokka \
+    --annotation-version 1.14.6
 ```
 
 ### Anvi'o workflow
@@ -720,7 +719,7 @@ __config.json:__
 When all the files have been created, check that everything is formatted correctly by doing a dry run.  
 
 ```bash
-module load anvio/7.1
+module load anvio/8
 anvi-run-workflow --workflow metagenomics --config-file config.json --dry-run
 ```
 
@@ -730,11 +729,11 @@ No matter which way you choose, you will need 12 CPUs, 50G of memory and 2 hours
 And the commands to run the workflow are below. Make sure you run it inside the `07_RECIPIENTS` folder.  
 
 ```bash
-module load anvio/7.1
+module load anvio/8
 anvi-run-workflow --workflow metagenomics --config-file config.json
 ```
 
-## Automatic binning
+## Automatic binning - OPTIONAL
 
 There are several different tools for automated binning and they all perform very differently (as you probably read in the blog post). We will use [SemiBin2](https://github.com/BigDataBiology/SemiBin) for the automated binning.  
 

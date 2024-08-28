@@ -11,7 +11,9 @@
 #SBATCH --array=1-9
 #SBATCH --gres=nvme:100
 
-module load metaphlan/4.0.6
+module load metaphlan/4.1.1
+
+cd /scratch/project_2001499/$USER/MBDP_Metagenomics_2024
 
 SAMPLE_ACC=$(sed -n ${SLURM_ARRAY_TASK_ID}p 01_DATA/DF16_accessions.txt)
 
@@ -21,6 +23,5 @@ metaphlan \
     --unclassified_estimation \
     --sample_id ${SAMPLE_ACC} \
     --input_type fastq \
-    --bowtie2db /scratch/project_2009008/DB/metaphlan \
     --output 05_TAXONOMY/${SAMPLE_ACC}.txt \
     --bowtie2out 05_TAXONOMY/${SAMPLE_ACC}.bowtie2.bz2 
