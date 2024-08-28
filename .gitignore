@@ -5,3 +5,7 @@
 *.txt
 *.json
 *.log
+02_ASSEMBLY/
+05_TAXONOMY/
+00_LOGS/
+!README.md

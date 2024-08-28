@@ -4,20 +4,22 @@
 
 | Time | Description | Link |
 | --- | --- | -- |
-| 10-10.15 | Introduction and course practicals | [Slides](../lectures/01_introduction.pdf) |
-| 10.15-11 | Introduction to metagenomics | [Slides](../lectures/01_introduction.pdf) |
-| 11-11.30 | Tommi Vatanen: Background on course data | [Slides](../lectures/01_introduction.pdf) |
-| 11.30-12.30 |Setup and Data retrieval | [Instructions](README.md#setup) |
+| 10-10.30 | __All:__ Introduction and course practicals | [Slides](../lectures/01_introduction.pdf) |
+| 10.30-11 | __Antti Karkman:__ Introduction to metagenomics | [Slides](../lectures/01_introduction.pdf) |
+| 11.00-11.30 | __Tommi Vatanen:__ Background on course data | [Slides](../lectures/01_introduction.pdf) |
+| 11.30-12.30 | __Hands-on:__ Setup and Data retrieval | [Instructions](README.md#setup) |
 | 12.30-13.30 | Lunch break  | :plate_with_cutlery: |
-| 13.30-14.30 | Seqeunce data QC | [Instructions](README.md#quality-control) |
-| 14.30-17.00 | Read-based taxonomic composition | [Instructions](README.md#read-based-taxonomy) |
+| 13.30-14.30 | __Hands-on:__ Sequence data QC | [Instructions](README.md#quality-control) |
+| 14.30-15.00 | __Freed Ahmad:__ Read-based metagenomcis | [Slides](../lectures/XXX) |
+| 15.00-16.00 | __Hands-on:__ Read-based taxonomic composition | [Instructions](README.md#read-based-taxonomy) |
+| 16.00-17.00 | __Hands-on:__ Metagenomic assembly | [Instructions](README.md#read-based-taxonomy) |
 | 17-17.45 | Daily wrap-up |  |
 
 ## Tuesday 03.09.2024
 
 | Time | Description | Link |
 | --- | --- | -- |
-| 10-11 | Metagenomic assembly & read-based approaches | [Slides](../lectures/02_assembly-and-read-based.pdf) |
+| 10-11 | __Antti Karkman:__  | [Slides](../lectures/02_assembly-and-read-based.pdf) |
 | 11-12 | Metagenome assembly | [Instructions](README.md#metagenome-assembly) |
 | 12-13 | Lunch break | :plate_with_cutlery: |
 | 13-16 | Read-based taxonomy | [Instructions](README.md#read-based-taxonomy) |
