@@ -17,7 +17,8 @@ Many things are possible thanks to the support from [CSC](http://www.csc.fi).
 
 ## Before the course
 
-Before the course starts, there is some preparatory work. Follow the instruction in [here](Practicals/before_the_course.md).  
+Before the course starts, you need to register to CSC and join the course project. You will also need an SSH manager for connecting to Puhti.  
+For more detailed information, follow the instruction in [here](Practicals/before_the_course.md).  
 
 __Compulsory prerequisites:__
 
