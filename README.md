@@ -17,8 +17,7 @@ Many things are possible thanks to the support from [CSC](http://www.csc.fi).
 
 ## Before the course
 
-Go to [myCSC](http://my.csc.fi) and join the course project (MBDP_Metagenomics). Link has been sent by email.  
-Follow the instruction in [here](Practicals/before_the_course.md).  
+Before the course starts, there is some preparatory work. Follow the instruction in [here](Practicals/before_the_course.md).  
 
 __Compulsory prerequisites:__
 
