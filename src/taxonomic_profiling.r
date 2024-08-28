@@ -28,7 +28,7 @@ TAX <- TAX %>% mutate(rowname=paste0("tax", seq(1:nrow(TAX)))) %>% column_to_row
 DF16_ps <- phyloseq(otu_table(OTU, taxa_are_rows=TRUE), tax_table(as.matrix(TAX)))
 
 ## As a last step we read in a table having some metadata for each of the samples and attach it to our phyloseq object
-metadata <- read.table("doc/metadata.txt", row.names = 1, header=TRUE)
+metadata <- read_delim("doc/metadata.txt", delim="\t") %>% column_to_rownames("Accession")
 sample_data(DF16_ps) <- sample_data(metadata)
 
 ## Then the phyloseq object is ready and we can visualise the results using ord_explore function from microViz package
