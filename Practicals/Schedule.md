@@ -13,13 +13,13 @@
 | 14.30-15.00 | __Freed Ahmad:__ Read-based metagenomcis | [Slides](../lectures/XXX) |
 | 15.00-16.00 | __Hands-on:__ Read-based taxonomic composition | [Instructions](README.md#read-based-taxonomy) |
 | 16.00-17.00 | __Hands-on:__ Metagenomic assembly | [Instructions](README.md#read-based-taxonomy) |
-| 17-17.45 | Daily wrap-up |  |
+| 17-17.45 | __Daily wrap-up__ |  |
 
 ## Tuesday 03.09.2024
 
 | Time | Description | Link |
 | --- | --- | -- |
-| 10-11 | __Antti Karkman:__  | [Slides](../lectures/02_assembly-and-read-based.pdf) |
+| 10-11 | __Jenni Hultman:__ Metagenomic assembly | [Slides](../lectures/02_assembly-and-read-based.pdf) |
 | 11-12 | Metagenome assembly | [Instructions](README.md#metagenome-assembly) |
 | 12-13 | Lunch break | :plate_with_cutlery: |
 | 13-16 | Read-based taxonomy | [Instructions](README.md#read-based-taxonomy) |
@@ -28,7 +28,7 @@
 
 | Time | Description | Link |
 | --- | --- | -- |
-| 10-11 | Assembly QC and genome-resolved metagenomics | [Slides](../lectures/03_assembly_qc-and-genome-resoved_metagenomics.pdf) |
+| 10-11 | __Antti Karkman:__ Genome-resolved metagenomics | [Slides](../lectures/03_assembly_qc-and-genome-resoved_metagenomics.pdf) |
 | 11-12 | Assembly QC | [Instructions](README.md#assembly-qc) |
 | 12-13 | Lunch break  | :plate_with_cutlery: |
 | 13-15 | Setting up anvi'o files | [Instructions](README.md#genome-resolved-metagenomics) |
