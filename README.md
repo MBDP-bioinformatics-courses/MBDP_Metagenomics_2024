@@ -63,5 +63,5 @@ By completing this course, you will:
 ## Organizers and teachers
 
 :woman_technologist: Jenni Hultman,  Natural Resources Institute Finland (LUKE)  
-:man_technologist: Antti Karkman, University of Helsinki  
-:man_technologist: Freed Ahmad, University of Helsinki  
+:man_technologist: Antti Karkman, Department of Microbiology, University of Helsinki  
+:man_technologist: Freed Ahmad, Department of Microbiology, University of Helsinki  
