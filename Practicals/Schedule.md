@@ -4,11 +4,14 @@
 
 | Time | Description | Link |
 | --- | --- | -- |
-| 10-11 | Introduction | [Slides](../lectures/01_introduction.pdf) |
-| 11-12 | Setup | [Instructions](README.md#setup) |
-| 12-13 | Lunch break  | :plate_with_cutlery: |
-| 13-14 | Data retrieval | [Instructions](README.md#data) |
-| 14-16 | Quality control | [Instructions](README.md#data) |
+| 10-10.15 | Introduction and course practicals | [Slides](../lectures/01_introduction.pdf) |
+| 10.15-11 | Introduction to metagenomics | [Slides](../lectures/01_introduction.pdf) |
+| 11-11.30 | Tommi Vatanen: Background on course data | [Slides](../lectures/01_introduction.pdf) |
+| 11.30-12.30 |Setup and Data retrieval | [Instructions](README.md#data) |
+| 12.30-13.30 | Lunch break  | :plate_with_cutlery: |
+| 13.30-14.30 | Seqeunce data QC | [Instructions](README.md#quality-control) |
+| 14.30-17.00 | Read-based taxonomic composition | [Instructions](README.md#read-based-taxonomy) |
+| 17-17.45 | Daily wrap-up |  |
 
 ## Tuesday 03.09.2024
 
