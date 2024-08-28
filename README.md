@@ -48,7 +48,7 @@ __Practicals:__
 
 ## Target group
 
-This course is targeted to PhD students from the Doctoral Programme in Microbiology and Biotechnology (MBDP). Also other interested in microbial metagenomics are welcome.   
+This course is targeted to PhD students from the Doctoral Programme in Microbiology and Biotechnology (MBDP). Also other PhD students interested in microbial metagenomics are welcome if space allows.  
 
 ## Learning outcomes
 
