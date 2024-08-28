@@ -42,8 +42,7 @@
 
 | Time | Description | Link |
 | --- | --- | -- |
-| 10.00-12.30 | _Hands-on:_ Strain engraftment w/ anvi'o | [Instructions](README.md#strain-engraftment) |
-| 12.30-13.30 | __Lunch break__ | :plate_with_cutlery: |
-| 13.30-16.00 | _Hands-on:_ Strain engraftment w/ anvi'o | [Instructions](README.md#strain-engraftment) |
-| 16.00-17.00 | __Questions and answers__ | [Instructions](README.md#interactive-use-and-binning) |
-| 17.00-17.45 | __Final conclusions and wrap-up__ |  |
+| 10-11 | Recap from Friday | [Slides](../lectures/04_Fri_recap.pdf) |
+| 11-12 | Manual binnning | [Instructions](README.md#interactive-use-and-binning) |
+| 12-13 | Lunch break | :plate_with_cutlery: |
+| 13-16 | Manual binnning cont'd | [Instructions](README.md#interactive-use-and-binning) |
