@@ -7,7 +7,7 @@
 | 10-10.15 | Introduction and course practicals | [Slides](../lectures/01_introduction.pdf) |
 | 10.15-11 | Introduction to metagenomics | [Slides](../lectures/01_introduction.pdf) |
 | 11-11.30 | Tommi Vatanen: Background on course data | [Slides](../lectures/01_introduction.pdf) |
-| 11.30-12.30 |Setup and Data retrieval | [Instructions](README.md#data) |
+| 11.30-12.30 |Setup and Data retrieval | [Instructions](README.md#setup) |
 | 12.30-13.30 | Lunch break  | :plate_with_cutlery: |
 | 13.30-14.30 | Seqeunce data QC | [Instructions](README.md#quality-control) |
 | 14.30-17.00 | Read-based taxonomic composition | [Instructions](README.md#read-based-taxonomy) |
