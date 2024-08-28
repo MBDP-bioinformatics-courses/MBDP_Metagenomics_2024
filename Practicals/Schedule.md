@@ -35,7 +35,7 @@
 | 12.30-13.30 | __Lunch break__  | :plate_with_cutlery: |
 | 13.30-15.30 | _Hands-on:_ Genome-resolved metagenomics | [Instructions](README.md#genome-resolved-metagenomics) |
 | 15.30-16.30 | _Hands-on:_ MAG taxonomy and QC | [Instructions](README.md#mag-qc-and-taxonomy) |
-| 16.30-17.30 | _Hands-on:_ Mappimg reads to MAGs | [Instructions](README.md#mag-qc-and-taxonomy) |
+| 16.30-17.30 | _Hands-on:_ Mapping reads to MAGs | [Instructions](README.md#mag-qc-and-taxonomy) |
 | 17.30-17.45 | __Daily wrap-up__ |  |
 
 ## Friday 06.09.2024
