@@ -24,4 +24,5 @@ metaphlan \
     --sample_id ${SAMPLE_ACC} \
     --input_type fastq \
     --output 05_TAXONOMY/${SAMPLE_ACC}.txt \
+    --bowtie2db /scratch/project_2001499/DBs/metaphlan \
     --bowtie2out 05_TAXONOMY/${SAMPLE_ACC}.bowtie2.bz2 

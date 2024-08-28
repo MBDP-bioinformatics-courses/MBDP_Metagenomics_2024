@@ -142,8 +142,8 @@ module load biokit
 for ACCESSION in $(cat DF16_accessions.txt)
 do
 	fasterq-dump --split-3 --skip-technical --progress --threads 4 $ACCESSION
-	pigz $ACCESSION_1.fastq
-	pigz $ACCESSION_2.fastq
+	pigz $ACCESSION"_1.fastq"
+	pigz $ACCESSION"_2.fastq"
 done
 ```
 
