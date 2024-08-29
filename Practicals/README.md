@@ -119,23 +119,24 @@ Go to the publication and find the sequencing project repository accession (BioP
 Then go to [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) and find all the reads for the project.  Open them in Run selector and find the run accessions of the samples from the super-donor (9 sequencing runs).  
 
 Finallly download only the accession numbers and make a file (`DF16_accessions.txt`) with only the accession, one line per accesion to the data folder in Puhti (`01_DATA/`).  
-We will use that file in the next step to download the data to Puhti.  
+We will use this file in the next steps.  
 
-We will use `fasterq-dump` from [SRA toolkit](https://github.com/ncbi/sra-tools) to download the read files. The toolkit can be found under the `biokit` module in Puhti. 
+To download the data, you can use e.g. `fasterq-dump` from [SRA toolkit](https://github.com/ncbi/sra-tools) to download the read files. The toolkit can be found under the `biokit` module in Puhti. 
 
-Apply for resources. This doesn't take that long, so no real need for screen session.  
-
-```bash
-sinteractive -A project_2001499 -m 10G -c 4 
-```
-
-Download the data to the `01_DATA` folder.  
+However, to save time, the data has been already downloaded to Puhti and we can copy all the read files from `/scratch/project_2001499/Data/DF16` (with `cp`). 
+Copy the data to the `01_DATA` folder.  
 
 ```bash
-cd 01_DATA
+cp SOURCE DESTINATION
 ```
 
-Load the `biokit` module and download the files with `fasterq-dump` using a simple for-loop.  
+After copying has finished, check what you got? Make sure you have all 9 sequenicng experiments copied.  
+If not, check which ones are missing and copy them individually using the missing run accession(s).  
+
+
+__DO NOT RUN!__  
+The data was originally downloaded with `fasterq-dump` using a simple for-loop. After downloading the files are compressed with `pigz`.   
+
 ```bash
 module load biokit
 
@@ -146,15 +147,6 @@ do
 	pigz $ACCESSION"_2.fastq"
 done
 ```
-
-To save time, it is also possible to copy (with `cp`) all the read files from `/scratch/project_2001499/Data/DF16`. 
-
-```bash 
-cp ...
-```
-
-After the downloading/copying has finished, check what you got? Make sure you have all 9 sequenicng experiments downloaded.  
-If not, check which ones are missing and download them individually with `fasterq-dump` using the missing run accession(s).  
 
 ## Quality control
 
