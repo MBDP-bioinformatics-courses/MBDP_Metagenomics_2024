@@ -307,7 +307,7 @@ During the contigs database creation, anvi'o does gene calling with prodigal, ca
 ```bash
 module load anvio/8
 anvi-script-reformat-fasta 02_ASSEMBLY/contigs.fasta --min-len 2500 -o 03_ANVIO/contigs2500.fasta
-anvi-gen-contigs-database -f 03_ANVIO/contigs2500.fasta -T 6 -o 03_ANVIO/CONTIGS.db
+anvi-gen-contigs-database -f 03_ANVIO/contigs2500.fasta -T $SLURM_CPUS_PER_TASK -o 03_ANVIO/CONTIGS.db
 ```
 
 ### Annotation of contigs database
