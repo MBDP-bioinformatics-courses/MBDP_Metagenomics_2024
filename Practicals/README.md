@@ -135,16 +135,16 @@ If not, check which ones are missing and copy them individually using the missin
 
 
 __DO NOT RUN!__  
-The data was originally downloaded with `fasterq-dump` using a simple for-loop. After downloading the files are compressed with `pigz`.   
+The data was originally downloaded with `fasterq-dump` using a simple for-loop. After download the files are compressed with `pigz`.   
 
 ```bash
 module load biokit
 
 for ACCESSION in $(cat DF16_accessions.txt)
 do
-	fasterq-dump --split-3 --skip-technical --progress --threads 4 $ACCESSION
-	pigz $ACCESSION"_1.fastq"
-	pigz $ACCESSION"_2.fastq"
+	fasterq-dump --split-3 --skip-technical --progress --threads $SLURM_CPUS_PER_TASK $ACCESSION
+	pigz --processes $SLURM_CPUS_PER_TASK $ACCESSION"_1.fastq"
+	pigz --processes $SLURM_CPUS_PER_TASK $ACCESSION"_2.fastq"
 done
 ```
 
@@ -319,7 +319,7 @@ To obtain the differential coverage information for each contig in our database,
 We used [bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/index.shtml) for the mapping and the first step is to create an index of the fasta file.  
 
 ```bash
- bowtie2-build 03_ANVIO/contigs2500.fasta 04_MAPPING/contigs
+bowtie2-build 03_ANVIO/contigs2500.fasta 04_MAPPING/contigs
 ```
 
 As we will be running the same job for all nine samples, the quickest way is to create an array job for the task.  
@@ -366,8 +366,8 @@ When all the mapping jobs have been finished, we can merge all the single profil
 For this task you will need 40G of memory and about 30 min.  
 
 ```bash
- anvi-merge 04_MAPPING/SRR*/PROFILE.db -o 04_MAPPING/MERGED -c 03_ANVIO/CONTIGS.db --enforce-hierarchical-clustering
- ```
+anvi-merge 04_MAPPING/SRR*/PROFILE.db -o 04_MAPPING/MERGED -c 03_ANVIO/CONTIGS.db --enforce-hierarchical-clustering
+```
 
 ### Interactive use and binning
 
@@ -478,7 +478,7 @@ You can use the spades script as a template.
 ### MAG QC with CheckM2
 
 ```bash
-#export CHECKM2DB="/scratch/project_2001499/DB/CheckM2/CheckM2_database/uniref100.KO.1.dmnd"
+export CHECKM2DB="/scratch/project_2001499/Databases/CheckM2_database/uniref100.KO.1.dmnd"
 
 /projappl/project_2001499/MAG_tools/bin/checkm2 predict \
     --input 06_GENOMES \
@@ -491,7 +491,7 @@ You can use the spades script as a template.
 ### MAG taxonomy with GTDB-Tk
 
 ```bash
-#export GTDBTK_DATA_PATH="/scratch/project_2001499/DB/release214/"
+export GTDBTK_DATA_PATH="/scratch/project_2001499/Databases/release214/"
 
 /projappl/project_2001499/MAG_tools/bin/gtdbtk classify_wf \
     --genome_dir 06_GENOMES \

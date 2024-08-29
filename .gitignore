@@ -13,5 +13,6 @@
 04_MAPPING/
 06_GENOMES/
 07_RECIPIENTS/
+mapping.sh
 !README.md
 !doc/metadata.txt
