@@ -507,7 +507,7 @@ export GTDBTK_DATA_PATH="/scratch/project_2001499/Databases/release220/"
 
 After quality control and taxonomic annotation of all MAGs, we will choose two for strain engraftment analysis. The Fig. 2 in the original publication can help you choose MAGs that could be of interest. We want to determine whether the donor strains have colonised the recipients. We can talk together which ones you could choose, but keep in mind that we might not have good quality genomes from all of those, so you need to use the CheckM2 and GTDB-Tk results to verify what you have.  
 
-When you have picked two, annotate them both with Bakta using the following command. Make sure the path to the genome is right (`GENOME_BIN`) and use the genus level annotation of the MAG as `GENOME_NAME`.  
+When you have picked two, annotate them both with prokka using the following command. Make sure the path to the genome is right (`GENOME_BIN`) and use the genus level annotation of the MAG as `GENOME_NAME`.  
 
 And of course allocate some resources: 4 CPUs, 20Gb of memory and 1 hour. It takes around 15-20 min per genome.  
 
