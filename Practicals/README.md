@@ -491,7 +491,7 @@ export CHECKM2DB="/scratch/project_2001499/Databases/CheckM2_database/uniref100.
 ### MAG taxonomy with GTDB-Tk
 
 ```bash
-export GTDBTK_DATA_PATH="/scratch/project_2001499/Databases/release214/"
+export GTDBTK_DATA_PATH="/scratch/project_2001499/Databases/release220/"
 
 /projappl/project_2001499/MAG_tools/bin/gtdbtk classify_wf \
     --genome_dir 06_GENOMES \
