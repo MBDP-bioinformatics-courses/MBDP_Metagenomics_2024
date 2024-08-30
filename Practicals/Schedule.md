@@ -46,4 +46,4 @@
 | 12.30-13.30 | __Lunch break__ | :plate_with_cutlery: |
 | 13.30-16.00 | _Hands-on:_ Strain engraftment w/ anvi'o | [Instructions](README.md#strain-engraftment) |
 | 16.00-17.00 | __Q & A__ and feedback| [Link to feedback](https://www.) |
-| 17.00-17.45 | __Final conclusions and wrap-up__ | [Slides]([Slides](../Lectures/07_final-wrap-up.pdf)) |
+| 17.00-17.45 | __Final conclusions and wrap-up__ | [Slides](../Lectures/07_final-wrap-up.pdf) |
