@@ -429,7 +429,7 @@ anvi-rename-bins \
     --collection-to-write MAGs \
     --call-MAGs \
     --min-completion-for-MAG 90 \
-    --max-redundancy-for-MAG 10 \
+    --max-redundancy-for-MAG 5 \
     --prefix DF16 \
     --report-file 03_ANVIO/MAG_report.txt
 
