@@ -10,9 +10,9 @@
 | 11.30-12.30 | _Hands-on:_ Setup and data retrieval | [Instructions](README.md#setup) |
 | 12.30-13.30 | __Lunch break__  | :plate_with_cutlery: |
 | 13.30-14.30 | _Hands-on:_ Sequence data QC | [Instructions](README.md#quality-control) |
-| 14.30-15.00 | __Freed Ahmad:__ Read-based metagenomcis | [Slides](../Lectures/XXX) |
-| 15.00-16.00 | _Hands-on:_ Read-based taxonomic composition | [Instructions](README.md#read-based-taxonomy) |
-| 16.00-17.30 | _Hands-on:_ Metagenomic assembly | [Instructions](README.md#read-based-taxonomy) |
+| 14.30-15.30 | _Hands-on:_ Metagenomic assembly | [Instructions](README.md#read-based-taxonomy) |
+| 15.30-16.00 | __Freed Ahmad:__ Read-based metagenomcis | [Slides](../Lectures/XXX) |
+| 16.00-17.30 | _Hands-on:_ Read-based taxonomic composition | [Instructions](README.md#read-based-taxonomy) |
 | 17.30-17.45 | __Daily wrap-up__ |  |
 
 ## Tuesday 03.09.2024
@@ -21,7 +21,7 @@
 | --- | --- | -- |
 | 10.00-10.30 | __Jenni Hultman:__ Metagenomic assembly and assembly QC | [Slides](../Lectures/XXX) |
 | 10.30-11.30 | _Hands-on:_ Metagenome assembly QC | [Instructions](README.md#assembly-qc) |
-| 11.30-12.30 | _Hands-on:_ Community composition in R | [Instructions](README.md#read-based-taxonomy) |
+| 11.30-12.30 | _Hands-on:_ Community composition in R | [Instructions](README.md#community-composition-analysis-in-r) |
 | 12.30-13.30 | __Lunch break__ | :plate_with_cutlery: |
 | 13.30-17.30 | _Hands-on:_ Setting up anvi'o files | [Instructions](README.md#genome-resolved-metagenomics) |
 | 17.30-17.45 | __Daily wrap-up__ |  |
@@ -45,5 +45,5 @@
 | 10.00-12.30 | _Hands-on:_ Strain engraftment w/ anvi'o | [Instructions](README.md#strain-engraftment) |
 | 12.30-13.30 | __Lunch break__ | :plate_with_cutlery: |
 | 13.30-16.00 | _Hands-on:_ Strain engraftment w/ anvi'o | [Instructions](README.md#strain-engraftment) |
-| 16.00-17.00 | __Q & A__ and feedback| [Link to feedback](https://www.) |
+| 16.00-17.00 | __Q & A__ and feedback| [Link to feedback](https://norppa.helsinki.fi/targets/82937025/feedback) |
 | 17.00-17.45 | __Final conclusions and wrap-up__ | [Slides](../Lectures/07_final-wrap-up.pdf) |

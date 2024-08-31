@@ -97,7 +97,7 @@ You always need to specify the accounting project (`-A`, `--account`). Otherwise
 
 [__Read more about interactive use of Puhti.__](https://docs.csc.fi/computing/running/interactive-usage/#sinteractive-in-puhti)  
 
-Screen is a handy way to run things in the background without losing them when you logout or have connection problems. However, you have to be careful whn using screen, you can easily get lost.  
+Screen is a handy way to run things in the background without losing them when you logout or have connection problems. However, you have to be careful when using screen, you can easily get lost.  
 And to make things even more complicated, the screen sessions are specific to each login node. And Puhti has at least 4 login nodes.  
 
 **Remember to always first open a screen session and only after that run `sinteractive`.**  
@@ -154,7 +154,7 @@ Before running any real analyses, we should do quality control (QC) for the sequ
 
 We use two widely used programs that are pre-installed in Puhti:
 
-* [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for running the QC fpor each sequence file.
+* [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for running the QC for each sequence file.
 * [MultiqC](https://multiqc.info/) to combine the individual reports from FastQC.  
 
 ```bash
@@ -170,7 +170,7 @@ module load multiqc
 multiqc --interactive --outdir 01_DATA/FASTQC 01_DATA/FASTQC/
 ```
 
-After running the QC steps, download the MultiQC report (`.html`) file to your local computer and open it with browser.  
+After running the QC steps, download the MultiQC report (`.html`) file to your local computer and open it with any browser.  
 We'll go thru the report together.  
 
 ## Metagenome assembly
@@ -206,7 +206,7 @@ And when it has started running, look at the output log file in `00_LOGS`.
 ## Read-based taxonomy
 
 While we wait for the assembly to finish, we can run the read-based taxonomic annotation for the donor samples. And later combine some ready-made output files to compare the recipients to the donor.  
-We'll use [metaphlan4](https://github.com/biobakery/MetaPhlAn) for the read-based taxonomic annotation. Metaphlan uses marker genes to profile taxonomic compposition in metagenomic data.  
+We'll use [metaphlan4](https://github.com/biobakery/MetaPhlAn) for the read-based taxonomic annotation. Metaphlan uses marker genes to profile taxonomic composition in metagenomic data.  
 
 To make things run a bit faster, we will run metaphlan as an [array job](https://docs.csc.fi/computing/running/array-jobs/). In a nutshell, all jobs will be run in parallel as individual jobs. This is a handy way to do the same thing for several files that are independent.
 Have a look at the array job file and find out how array jobs are defined by comparing it to the spades batch job we ran earlier.  
@@ -223,20 +223,26 @@ And when you have a basic understanding what we are about to do, submit the job(
 sbatch src/metaphlan.sh
 ```
 
-And again you can monitor the jobs with the same way as spades batch job.  
+And again you can monitor the jobs with the same way as the spades batch job.  
 
 Taxonomic profiling doesn't take that long, approx 30 min per sample, but as they run in parallel, it will not take n x 30 min, but a lot less depending on the queue.  
-While you wait, you can log in to Puhti web interface at [www.puhti.csc.fi](http://www.puhti.csc.fi) and open a Rstudio session (use the default options).  
-We will analyse the results in R using few packages for microbiome data analysis.  
 
 When all the metaphlan jobs are finished, we can go on with the data analysis of the microbial community.  
 But before we can read the data into R, we need to combine the individual metaphlan outputs and extract the species level annotations from there.  
 
 ```bash
 module load metaphlan/4.1.1
+
 merge_metaphlan_tables.py 05_TAXONOMY/SRR*.txt > 05_TAXONOMY/metaphlan.txt
-awk '$1 ~ "clade_name" || $1 ~ "s__" {print $0}' 05_TAXONOMY/metaphlan.txt |grep -v "t__" > 05_TAXONOMY/metaphlan_species.txt
+
+awk '$1 ~ "clade_name" || $1 ~ "s__" {print $0}' 05_TAXONOMY/metaphlan.txt |\
+    grep -v "t__" > 05_TAXONOMY/metaphlan_species.txt
 ```
+
+## Community composition analysis in R
+
+Log in to Puhti web interface at [www.puhti.csc.fi](http://www.puhti.csc.fi) and open a Rstudio session (use the default options).  
+We will analyse the results in R using few packages for microbiome data analysis.  
 
 Then you can follow the R instruction in the file `src/taxonomic_profiling.r` and run the analysis in browser interface of Rstudio running at Puhti.  
 
@@ -247,7 +253,9 @@ First copy the taxonomic profiles of additional 192 samples to the metaphlan out
 cp /scratch/project_2001499/Data/metaphlan/*.txt 05_TAXONOMY/
 
 merge_metaphlan_tables.py 05_TAXONOMY/SRR*.txt > 05_TAXONOMY/metaphlan.txt
-awk '$1 ~ "clade_name" || $1 ~ "s__" {print $0}' 05_TAXONOMY/metaphlan.txt |grep -v "t__" > 05_TAXONOMY/metaphlan_species.txt
+
+awk '$1 ~ "clade_name" || $1 ~ "s__" {print $0}' 05_TAXONOMY/metaphlan.txt |\
+    grep -v "t__" > 05_TAXONOMY/metaphlan_species.txt
 ```
 
 Then re-run the R part.  
@@ -269,6 +277,7 @@ Then when you're connected to a computing node and have read about the options f
 
 ```bash
 module load quast/5.2.0 
+
 metaquast.py 02_ASSEMBLY/contigs.fasta --max-ref-num 0 --threads $SLURM_CPUS_PER_TASK -o 02_ASSEMBLY/QUAST --fast
 ```
 
@@ -298,19 +307,9 @@ During the contigs database creation, anvi'o does gene calling with prodigal, ca
 
 ```bash
 module load anvio/8
+
 anvi-script-reformat-fasta 02_ASSEMBLY/contigs.fasta --min-len 2500 -o 03_ANVIO/contigs2500.fasta
 anvi-gen-contigs-database -f 03_ANVIO/contigs2500.fasta -T $SLURM_CPUS_PER_TASK -o 03_ANVIO/CONTIGS.db
-```
-
-### Annotation of contigs database
-
-After the contigs database has been created, we'll add only few annotations to the database that aid in the binning process. There are many other commands to add other annotations to the database.  
-`anvi-run-hmms` annotates single-copy core genes and ribosomal RNA's that are used to estimate the completeness and contamination of a bin.  
-`anvi-run-scg-taxonomy` annotates single-copy core genes with taxonomic information.  
-
-```bash
-anvi-run-hmms -c 03_ANVIO/CONTIGS.db -T $SLURM_CPUS_PER_TASK
-anvi-run-scg-taxonomy -c 03_ANVIO/CONTIGS.db -T $SLURM_CPUS_PER_TASK
 ```
 
 ### Mapping and profiling
@@ -358,6 +357,16 @@ After the file is ready, submit the jobs to the queue.
 
 ```bash
 sbatch src/mapping.sh
+```
+### Annotation of contigs database
+
+While the mapping jobs are running and the the contigs database has been created, we'll add only few annotations to the database that aid in the binning process. There are many other commands to add other annotations to the database.  
+`anvi-run-hmms` annotates single-copy core genes and ribosomal RNA's that are used to estimate the completeness and contamination of a bin.  
+`anvi-run-scg-taxonomy` annotates single-copy core genes with taxonomic information.  
+
+```bash
+anvi-run-hmms -c 03_ANVIO/CONTIGS.db -T $SLURM_CPUS_PER_TASK
+anvi-run-scg-taxonomy -c 03_ANVIO/CONTIGS.db -T $SLURM_CPUS_PER_TASK
 ```
 
 ### Merging the profiles
@@ -448,7 +457,7 @@ exit
 
 ### MAG folder
 
-Now each bin that had completeness and redundancy (according to anvi'o) over 70 % and under 10 %, respectively, will have "MAG" in its name. For example `DF16_MAG_00001`. So we can only pick those for further analyses. We will make a folder with softlinks to all of our MAGs and then analyze only these with CheckM2 and GTDB-Tk.  
+Now each bin that had completeness and redundancy (according to analyses by anvi'o) over 90 % and under 5 %, respectively, will have "MAG" in its name. For example `DF16_MAG_00001`. So we can only pick those for further analyses. We will make a softlinks to all of our MAGs to the folder `06_GENOMES` and then analyze only these with CheckM2 and GTDB-Tk.  
 
 ```bash
 cd 06_GENOMES
@@ -473,7 +482,7 @@ __GTDB-Tk:__
 * 200G of local storage
 * 10 CPUs
 
-You can use the spades script as a template.
+You can use the spades script as a template, but remember to modify all the necessary parts.
 
 ### MAG QC with CheckM2
 
@@ -509,7 +518,7 @@ After quality control and taxonomic annotation of all MAGs, we will choose two f
 
 When you have picked two, annotate them both with prokka using the following command. Make sure the path to the genome is right (`GENOME_BIN`) and use the genus level annotation of the MAG as `GENOME_NAME`.  
 
-And of course allocate some resources: 4 CPUs, 20Gb of memory and 1 hour. It takes around 15-20 min per genome.  
+And of course allocate some resources: 4 CPUs, 20Gb of memory and 1 hour. It takes few minutes per genome.  
 
 ```bash
 sinteractive -A project_2001499 ...
@@ -531,9 +540,9 @@ prokka \
 The next step is to determine the strain engraftment of the selected MAGs from the donor to few selected recipients.  
 We will use anvio workflows, which is a snakemake wrapper for anvi'o. You can learn more about anvi'o workflows here: [https://merenlab.org/2018/07/09/anvio-snakemake-workflows](https://merenlab.org/2018/07/09/anvio-snakemake-workflows) and about Snakemake, the workflow manager used with anvi'o workflows, from here: [https://snakemake.readthedocs.io/en/stable/](https://snakemake.readthedocs.io/en/stable/).  
 
-Before we can run the workflow, we need to fetch the recipient data, pre-process the annotated genome files (Genbank files from Bakta) for anvi'o and prepare few files for the workflow.  
+Before we can run the workflow, we need to fetch the recipient data, pre-process the annotated genome files (Genbank files from prokka) for anvi'o and prepare few files for the workflow.  
 
-First make a whole new folder for all this. And put all output files and files we make in this folder.
+The strain engraftment workflow will be run in a separate folder `07_RECIPIENTS`. We'll put all output files and files we make in this folder.
 
 ```bash
 cd 07_RECIPIENTS
@@ -541,7 +550,7 @@ cd 07_RECIPIENTS
 
 ### Fetch recipient data
 
-We will download all the data from three recipients. Two from the FMT and one from the placebo group.  
+Copy all seqeunce data for three recipients. Two from the FMT and one from the placebo group.  
 The subject identifiers for these are:
 
 ```bash
@@ -550,7 +559,8 @@ TF29
 TF45
 ```
 
-You should have 12 read accessions to download. Using the accessions, download the right read files (both R1 and R2) from the folder `/scratch/project_2001499/Data/Recipients`.  
+Go to SRA and find the run accessions for all sequencing experiments from these individuals.  
+You should have 12 read accessions. Using these accessions, download the right read files (both R1 and R2) from the folder `/scratch/project_2001499/Data/Recipients`.  
 
 Put the recipient data inside a `Data` folder in the `07_RECIPINTS` folder. 
 
@@ -561,7 +571,7 @@ cp ...
 
 ### Process Genbank files
 
-Process both selected MAGs. The input is the genbank file (`.gbXX`) in the prokka output folder.  
+Process both selected MAGs. The input is the genbank file (`.gbk`) in the prokka output folder.  
 Write the output files to a new folder called `Genomes` in our `07_RECIPIENTS` folder. Add the genome name as the prefix (option `-O`).  
 
 ```bash
@@ -570,8 +580,8 @@ mkdir Genomes
 module load anvio/8
 
 anvi-script-process-genbank \
-    -i PATH/TO/GENOME_NAME.gbff \
-    -O PATH/TO/GENOME_NAME \
+    -i PATH/TO/GENOME_NAME.gbk \
+    -O Genomes/GENOME_NAME \
     --annotation-source prokka \
     --annotation-version 1.14.6
 ```
@@ -712,6 +722,7 @@ When all the files have been created, check that everything is formatted correct
 
 ```bash
 module load anvio/8
+
 anvi-run-workflow --workflow metagenomics --config-file config.json --dry-run
 ```
 
@@ -722,7 +733,14 @@ And the commands to run the workflow are below. Make sure you run it inside the 
 
 ```bash
 module load anvio/8
+
 anvi-run-workflow --workflow metagenomics --config-file config.json
+```
+
+When the workflow has finished, open the resulting contigs database and merged profile database with `anvi-interactive`.  
+
+```bash
+anvi-interactive -c PATH/TO/CONTIGS_DB -p PATH/TO/MERGED_PROFILE -P $ANVIO_PORT
 ```
 
 ## Automatic binning - OPTIONAL
@@ -734,7 +752,7 @@ Semibin2 uses deep learning in metagenomic binning and has pre-trained models fo
 We will use the same files we created and used in the manual binning with anvi'o. The job can be run interactively or as a batch job. You will need at least 6 CPUs, 50G of memory, 100G of local storage and many hours (to be sure this time). My test run took 35 min.  
 Allocate the resources or write a batch job script and use the following command to run Semibin2.  
 
-Also make sure to run this from our course main folder (MBDP_Metagenomics_2024) so that all the paths are right.  
+Also make sure to run this from our course main folder (MBDP_Metagenomics) so that all the paths are right.  
 
 ```bash
 /projappl/project_2001499/Semibin2/bin/SemiBin2 single_easy_bin \
