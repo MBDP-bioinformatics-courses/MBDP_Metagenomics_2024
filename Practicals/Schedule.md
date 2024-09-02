@@ -11,7 +11,7 @@
 | 12.30-13.30 | __Lunch break__  | :plate_with_cutlery: |
 | 13.30-14.30 | _Hands-on:_ Sequence data QC | [Instructions](README.md#quality-control) |
 | 14.30-15.30 | _Hands-on:_ Metagenomic assembly | [Instructions](README.md#read-based-taxonomy) |
-| 15.30-16.00 | __Freed Ahmad:__ Read-based metagenomcis | [Slides](../Lectures/XXX) |
+| 15.30-16.00 | __Freed Ahmad:__ Read-based metagenomcis | [Slides](../Lectures/02_read-based-metagenomics.pdf) |
 | 16.00-17.30 | _Hands-on:_ Read-based taxonomic composition | [Instructions](README.md#read-based-taxonomy) |
 | 17.30-17.45 | __Daily wrap-up__ |  |
 
