@@ -524,7 +524,7 @@ export GTDBTK_DATA_PATH="/scratch/project_2001499/Databases/GTDB/release220/"
 
 After quality control and taxonomic annotation of all MAGs, we will choose two for strain engraftment analysis. The Fig. 2 in the original publication can help you choose MAGs that could be of interest. We want to determine whether the donor strains have colonised the recipients. We can talk together which ones you could choose, but keep in mind that we might not have good quality genomes from all of those, so you need to use the CheckM2 and GTDB-Tk results to verify what you have.  
 
-When you have picked two, annotate them both with prokka using the following command. Make sure the path to the genome is right (`GENOME_BIN`) and use the genus level annotation of the MAG as `GENOME_NAME`.  
+When you have picked two, annotate them both with bakta using the following command. Make sure the path to the genome is right (`GENOME_BIN`) and use the genus level annotation of the MAG as `GENOME_NAME`.  
 
 And of course allocate some resources: 4 CPUs, 20Gb of memory and 1 hour. It takes few minutes per genome.  
 
@@ -551,7 +551,7 @@ module purge
 The next step is to determine the strain engraftment of the selected MAGs from the donor to few selected recipients.  
 We will use anvio workflows, which is a snakemake wrapper for anvi'o. You can learn more about anvi'o workflows here: [https://merenlab.org/2018/07/09/anvio-snakemake-workflows](https://merenlab.org/2018/07/09/anvio-snakemake-workflows) and about Snakemake, the workflow manager used with anvi'o workflows, from here: [https://snakemake.readthedocs.io/en/stable/](https://snakemake.readthedocs.io/en/stable/).  
 
-Before we can run the workflow, we need to fetch the recipient data, pre-process the annotated genome files (Genbank files from prokka) for anvi'o and prepare few files for the workflow.  
+Before we can run the workflow, we need to fetch the recipient data, pre-process the annotated genome files (Genbank files from bakta) for anvi'o and prepare few files for the workflow.  
 
 The strain engraftment workflow will be run in a separate folder `07_RECIPIENTS`. We'll put all output files and files we make in this folder.
 
@@ -582,7 +582,7 @@ cp ...
 
 ### Process Genbank files
 
-Process both selected MAGs. The input is the genbank file (`.gbk`) in the prokka output folder.  
+Process both selected MAGs. The input is the genbank file (`.gbff`) in the bakta output folder.  
 Write the output files to a new folder called `Genomes` in our `07_RECIPIENTS` folder. Add the genome name as the prefix (option `-O`).  
 
 ```bash
@@ -592,10 +592,10 @@ module purge
 module load anvio/8
 
 anvi-script-process-genbank \
-    -i PATH/TO/GENOME_NAME.gbk \
+    -i PATH/TO/GENOME_NAME.gbff \
     -O Genomes/GENOME_NAME \
-    --annotation-source prokka \
-    --annotation-version 1.14.6
+    --annotation-source bakta \
+    --annotation-version 1.9.4
 ```
 
 ### Anvi'o workflow
