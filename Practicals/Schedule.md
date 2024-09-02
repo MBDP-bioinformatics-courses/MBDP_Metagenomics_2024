@@ -6,7 +6,7 @@
 | --- | --- | -- |
 | 10.00-10.30 | __Everyone:__ Introductions and course practicals | [Slides](../Lectures/00_practicals.pdf) |
 | 10.30-11.00 | __Antti Karkman:__ Introduction to metagenomics | [Slides](../Lectures/01_introduction.pdf) |
-| 11.00-11.30 | __Tommi Vatanen:__ Background on course data | [Slides](../Lectures/XXX) |
+| 11.00-11.30 | __Tommi Vatanen:__ Background on course data | [Slides](../Lectures/Gut-Bugs-intro-Vatanen.pdf) |
 | 11.30-12.30 | _Hands-on:_ Setup and data retrieval | [Instructions](README.md#setup) |
 | 12.30-13.30 | __Lunch break__  | :plate_with_cutlery: |
 | 13.30-14.30 | _Hands-on:_ Sequence data QC | [Instructions](README.md#quality-control) |
