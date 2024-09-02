@@ -157,6 +157,14 @@ We use two widely used programs that are pre-installed in Puhti:
 * [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for running the QC for each sequence file.
 * [MultiqC](https://multiqc.info/) to combine the individual reports from FastQC.  
 
+First allocate some computing resources
+
+```bash
+sinteractive -A project_2001499
+```
+
+Then run `FastQC and MultiQC.   
+
 ```bash
 cd /scratch/project_2001499/$USER/MBDP_Metagenomics_2024
 mkdir 01_DATA/FASTQC
@@ -250,7 +258,7 @@ After we have analysed the taxonomic profiles of the donor, we can combine the r
 First copy the taxonomic profiles of additional 192 samples to the metaphlan output folder and re-run the merge command above.  
 
 ```bash
-cp /scratch/project_2001499/Data/metaphlan/*.txt 05_TAXONOMY/
+cp /scratch/project_2001499/Data/Recipients/metaphlan/*.txt 05_TAXONOMY/
 
 merge_metaphlan_tables.py 05_TAXONOMY/SRR*.txt > 05_TAXONOMY/metaphlan.txt
 
