@@ -485,7 +485,7 @@ __CheckM2:__
 
 __GTDB-Tk:__
 
-* 70G of memory
+* 100G of memory
 * 2 hours of time
 * 200G of local storage
 * 10 CPUs
@@ -533,14 +533,17 @@ sinteractive -A project_2001499 ...
 ```
 
 ```bash
-module load prokka/1.14.6
+module purge
 
-prokka \
+/projappl/project_2001499/bakta/bin/bakta \
+    06_GENOMES/GENOME_BIN.fa  \
+    --db /scratch/project_2001499/Databases/bakta/db-light \
+    --skip-pseudo \
+    --skip-sorf \
     --prefix GENOME_NAME \
     --locus GENOME_NAME \
-    --cpus $SLURM_CPUS_PER_TASK \
-    --outdir 06_GENOMES
-	06_GENOMES/GENOME_BIN.fa
+    --threads $SLURM_CPUS_PER_TASK \
+    --output 06_GENOMES/GENOME_NAME 
 ```
 
 ## Strain engraftment
@@ -585,6 +588,7 @@ Write the output files to a new folder called `Genomes` in our `07_RECIPIENTS` f
 ```bash
 mkdir Genomes
 
+module purge
 module load anvio/8
 
 anvi-script-process-genbank \
