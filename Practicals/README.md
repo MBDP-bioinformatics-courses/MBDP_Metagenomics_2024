@@ -163,7 +163,7 @@ First allocate some computing resources
 sinteractive -A project_2001499
 ```
 
-Then run `FastQC and MultiQC.   
+Then run `FastQC` and `MultiQC`.  
 
 ```bash
 cd /scratch/project_2001499/$USER/MBDP_Metagenomics_2024
