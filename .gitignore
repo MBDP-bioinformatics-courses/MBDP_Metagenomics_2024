@@ -16,3 +16,6 @@
 mapping.sh
 !README.md
 !doc/metadata.txt
+.DS_Store
+checkm.sh
+gtdbtk.sh
