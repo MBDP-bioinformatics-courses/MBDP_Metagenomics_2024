@@ -433,7 +433,7 @@ But since there are probably a lot of low quality bins (low completeness), let's
 Allocate resources for the job. You will need the default resource for 30 min.  
 
 ```bash
-sinteractive -A project_2001499 -t 00:30:00
+sinteractive -A project_2001499 -t 00:30:00 -m 5G
 ```
 
 ```bash
