@@ -2,7 +2,7 @@
 #SBATCH --job-name metaphlan
 #SBATCH --output 00_LOGS/metaphlan_%A_%a.out
 #SBATCH --error 00_LOGS/metaphlan_%A_%a.err
-#SBATCH --time 00:30:00
+#SBATCH --time 00:45:00
 #SBATCH --nodes 1
 #SBATCH --ntasks-per-node 1
 #SBATCH --cpus-per-task 12
