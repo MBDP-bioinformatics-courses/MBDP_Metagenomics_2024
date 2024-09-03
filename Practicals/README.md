@@ -286,7 +286,7 @@ Then when you're connected to a computing node and have read about the options f
 ```bash
 module load quast/5.2.0 
 
-metaquast.py 02_ASSEMBLY/contigs.fasta --max-ref-num 0 --threads $SLURM_CPUS_PER_TASK -o 02_ASSEMBLY/QUAST --fast
+metaquast.py 02_ASSEMBLY/contigs.fasta --max-ref-num 0 -o 02_ASSEMBLY/QUAST --fast
 ```
 
 When the job is finished, free the resources with:  
