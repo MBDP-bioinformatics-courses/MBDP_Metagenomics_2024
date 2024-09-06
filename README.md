@@ -41,7 +41,7 @@ __Practicals:__
 | Tuesday 03.09.   | 10.00-17.45   | :office: __Athena__ | Hall 169  |
 | Wednesday 04.09. | 10.00-17.45   | :office: __Athena__ | Hall 169  |
 | Friday 06.09.    | 10.00-17.45   | :office: __Athena__ | Hall 169  |
-| Friday 15.12.    | 10.00-17.45   | :office: __Athena__ | Hall 169  |
+
 
 [__-- Detailed SCHEDULE --__](Practicals/Schedule.md)  
 [__-- Link to PRACTICALS --__](Practicals/README.md)
